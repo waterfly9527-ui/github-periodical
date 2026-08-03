@@ -1,14 +1,16 @@
 {
-  "version": "1.0",
-  "description": "GitHub 开源项目数据模型",
-  "fields": [
-    "name",
-    "repo",
-    "summary",
-    "language",
-    "license",
-    "stars_snapshot",
-    "forks_snapshot",
-    "activity_signal"
+  "version": "2026-08-03",
+  "updated_at": "2026-08-03T15:41:00+08:00",
+  "source": "GitHub only",
+  "snapshot_notice": "Stars, forks and daily trending gains are generation-time snapshots.",
+  "projects": [
+    {"name":"reverse-skill","repo":"zhaoxuya520/reverse-skill","category":"安全工具","language":"PowerShell","license":"MIT（部分组件另有许可）","stars_snapshot":14312,"forks_snapshot":2109,"daily_stars_snapshot":1141,"activity_signal":"GitHub Trending 当日新增 1,141 Stars；仓库显示 104 次提交","url":"https://github.com/zhaoxuya520/reverse-skill"},
+    {"name":"OpenWork","repo":"different-ai/openwork","category":"AI 工作流","language":"TypeScript","license":"MIT；/ee 目录为 Fair Source","stars_snapshot":20505,"forks_snapshot":2102,"daily_stars_snapshot":280,"activity_signal":"GitHub Trending 当日新增 280 Stars；仓库显示 4,129 次提交","url":"https://github.com/different-ai/openwork"},
+    {"name":"TencentDB Agent Memory","repo":"TencentCloud/TencentDB-Agent-Memory","category":"Agent 基础设施","language":"TypeScript","license":"MIT","stars_snapshot":11432,"forks_snapshot":1079,"daily_stars_snapshot":602,"activity_signal":"GitHub Trending 当日新增 602 Stars；仓库显示 5 次提交","url":"https://github.com/TencentCloud/TencentDB-Agent-Memory"},
+    {"name":"DwarfStar / ds4","repo":"antirez/ds4","category":"本地 AI","language":"C","license":"MIT","stars_snapshot":20119,"forks_snapshot":1783,"daily_stars_snapshot":139,"activity_signal":"GitHub Trending 当日新增 139 Stars","url":"https://github.com/antirez/ds4"},
+    {"name":"DeepSeek-Reasonix","repo":"esengine/DeepSeek-Reasonix","category":"开发者工具","language":"Go","license":"MIT","stars_snapshot":29368,"forks_snapshot":1894,"daily_stars_snapshot":333,"activity_signal":"GitHub Trending 当日新增 333 Stars","url":"https://github.com/esengine/DeepSeek-Reasonix"},
+    {"name":"Flint Chart","repo":"microsoft/flint-chart","category":"数据可视化","language":"TypeScript","license":"MIT","stars_snapshot":3262,"forks_snapshot":164,"daily_stars_snapshot":302,"activity_signal":"GitHub Trending 当日新增 302 Stars；仓库显示 344 次提交","url":"https://github.com/microsoft/flint-chart"},
+    {"name":"RapidRAW","repo":"CyberTimon/RapidRAW","category":"创意工具","language":"TypeScript","license":"AGPL-3.0","stars_snapshot":9113,"forks_snapshot":471,"daily_stars_snapshot":30,"activity_signal":"GitHub Trending 当日新增 30 Stars；仓库显示 2,332 次提交","url":"https://github.com/CyberTimon/RapidRAW"},
+    {"name":"Music Assistant Server","repo":"music-assistant/server","category":"智能家居","language":"Python","license":"Apache-2.0","stars_snapshot":2913,"forks_snapshot":525,"daily_stars_snapshot":3,"activity_signal":"GitHub Trending 当日新增 3 Stars","url":"https://github.com/music-assistant/server"}
   ]
 }
