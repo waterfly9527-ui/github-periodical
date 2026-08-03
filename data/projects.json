@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "description": "GitHub 开源项目数据模型",
+  "fields": [
+    "name",
+    "repo",
+    "summary",
+    "language",
+    "license",
+    "stars_snapshot",
+    "forks_snapshot",
+    "activity_signal"
+  ]
+}
