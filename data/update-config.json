@@ -1,0 +1,22 @@
+{
+  "schedule": {
+    "daily": "Tuesday-Friday",
+    "weekly": "Monday morning"
+  },
+  "source": "GitHub only",
+  "sources": [
+    "repositories",
+    "README",
+    "Issues",
+    "Pull Requests",
+    "Commits",
+    "Releases",
+    "Topics",
+    "License"
+  ],
+  "rules": {
+    "avoid_recent_duplicates": true,
+    "daily_projects": "5-10",
+    "weekly_projects": "5-10"
+  }
+}
