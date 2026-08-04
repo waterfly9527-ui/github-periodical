@@ -1,0 +1,27 @@
+{
+  "issue": "2026-W32-extra",
+  "edition_type": "extra",
+  "title": "用户拥有的软件栈：本地优先正在从功能变成架构",
+  "published_at": "2026-08-04T09:35:00+08:00",
+  "snapshot_date": "2026-08-04",
+  "source": "GitHub repository pages, README, Releases and License files only",
+  "thesis": "本地优先的重点已经不只是离线运行，而是让用户重新拥有运行时、数据、接口和知识资产的决定权。",
+  "layers": [
+    {"name":"体验层","projects":["pascalorg/editor","moeru-ai/airi"]},
+    {"name":"模型接口层","projects":["andrewyng/aisuite","huggingface/speech-to-speech"]},
+    {"name":"知识层","projects":["virgiliojr94/book-to-skill","affaan-m/ECC"]},
+    {"name":"数据执行层","projects":["opengeos/GeoLibre","jenkinsci/jenkins"]}
+  ],
+  "projects": [
+    {"name":"Pascal Editor","repo":"pascalorg/editor","layer":"体验层","language":"TypeScript","license":"MIT","stars_snapshot":18504,"forks_snapshot":2519,"position":"浏览器本地优先的专业 3D 应用与可嵌入编辑器。"},
+    {"name":"Project AIRI","repo":"moeru-ai/airi","layer":"体验层","language":"TypeScript","license":"MIT","stars_snapshot":44654,"forks_snapshot":4440,"position":"用户拥有的实时 AI 角色体验层。"},
+    {"name":"aisuite","repo":"andrewyng/aisuite","layer":"模型接口层","language":"Python","license":"MIT","stars_snapshot":15632,"forks_snapshot":1654,"position":"用统一接口获得模型供应商选择权。"},
+    {"name":"Speech-to-Speech","repo":"huggingface/speech-to-speech","layer":"模型接口层","language":"Python","license":"Apache-2.0","stars_snapshot":7045,"forks_snapshot":942,"position":"可替换、可本地部署的实时语音管线。"},
+    {"name":"book-to-skill","repo":"virgiliojr94/book-to-skill","layer":"知识层","language":"Python","license":"MIT","stars_snapshot":11074,"forks_snapshot":1318,"position":"把专业文档编译为可迁移的 Agent Skill。"},
+    {"name":"ECC","repo":"affaan-m/ECC","layer":"知识层","language":"JavaScript","license":"MIT","stars_snapshot":234635,"forks_snapshot":35760,"position":"跨编码 Agent 的组织级技能、规则与安全基线。"},
+    {"name":"GeoLibre","repo":"opengeos/GeoLibre","layer":"数据执行层","language":"TypeScript","license":"MIT","stars_snapshot":3243,"forks_snapshot":383,"position":"浏览器和本地设备上的专业空间数据分析。"},
+    {"name":"Jenkins","repo":"jenkinsci/jenkins","layer":"数据执行层","language":"Java","license":"MIT","stars_snapshot":26031,"forks_snapshot":9684,"position":"可自托管、可审计的工程执行控制面。"}
+  ],
+  "adoption_path": ["先获得接口选择权","再迁移知识与规则","最后掌控数据与执行"],
+  "risks": ["本地标签不代表数据不会外发","插件与钩子扩大供应链和权限风险","自托管带来长期运维成本","统一接口可能掩盖后端能力差异"]
+}
