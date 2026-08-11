@@ -1,0 +1,46 @@
+{
+  "issue": "2026-W33-extra",
+  "edition_type": "extra",
+  "title": "2D → 3D：从单目深度到实时 SBS / VR 的开源链路",
+  "published_at": "2026-08-11T10:17:00+08:00",
+  "snapshot_date": "2026-08-11",
+  "source": "GitHub only: repository pages, README, commits, releases and license files",
+  "open_source_project_count": 14,
+  "research_open_code_count": 2,
+  "thesis": "实用的 2D→3D 已经形成分层链路：单目深度负责理解几何，视频模型负责时间一致性，视图合成负责生成左右眼，SBS/TAB/WebXR 负责交付；游戏实时立体化则常直接读取渲染器深度缓冲，以低延迟换取更窄的适用范围。",
+  "pipeline": [
+    {"stage":"1. 单目深度","description":"从一张 RGB 图估计相对或度量深度。"},
+    {"stage":"2. 视频时序深度","description":"约束跨帧深度，减少闪烁、呼吸和边缘跳动。"},
+    {"stage":"3. 双眼视图合成","description":"根据深度进行水平视差、网格/像素重投影，并处理遮挡空洞。"},
+    {"stage":"4. SBS / TAB / WebXR 输出","description":"将左右眼打包为显示设备可消费的立体格式。"},
+    {"stage":"5. 游戏实时路径","description":"优先读取游戏深度缓冲，通过 ReShade/驱动层实时生成或重排双眼画面。"}
+  ],
+  "projects": [
+    {"name":"Depth Anything V2","repo":"DepthAnything/Depth-Anything-V2","layer":"单目深度","language":"Python","license":"Apache-2.0 code; Small weights Apache-2.0; larger weights CC-BY-NC-4.0","stars_snapshot":8600,"forks_snapshot":900,"approximate":true,"realtime":"可优化到实时","output":"relative / metric depth","position":"当前通用单目深度的重要基础模型，细节与边缘质量适合后续立体重投影。"},
+    {"name":"Video Depth Anything","repo":"DepthAnything/Video-Depth-Anything","layer":"视频时序深度","language":"Python","license":"Apache-2.0","stars_snapshot":2000,"forks_snapshot":190,"approximate":true,"realtime":"支持 streaming 路径","output":"temporally consistent video depth","position":"把 Depth Anything 延伸到长视频，重点解决跨帧一致性。"},
+    {"name":"Marigold","repo":"prs-eth/Marigold","layer":"单目深度","language":"Python","license":"Apache-2.0 code; model license separately governed","stars_snapshot":3200,"forks_snapshot":210,"approximate":true,"realtime":"偏离线","output":"high-quality depth / normals / intrinsics","position":"扩散式单目几何估计，适合更看重边缘和细节质量的离线流程。"},
+    {"name":"ZoeDepth","repo":"isl-org/ZoeDepth","layer":"单目深度","language":"Python","license":"MIT","stars_snapshot":2800,"forks_snapshot":280,"approximate":true,"realtime":"可加速","output":"metric depth","position":"经典单目度量深度方案，已归档但仍是大量 2D→3D 工具的兼容基线。"},
+    {"name":"MiDaS","repo":"isl-org/MiDaS","layer":"单目深度","language":"Python","license":"MIT","stars_snapshot":5400,"forks_snapshot":730,"approximate":true,"realtime":"模型尺寸可选","output":"relative inverse depth","position":"历史影响力很大的通用相对深度基础项目，已归档但生态兼容性广。"},
+    {"name":"nunif / iw3","repo":"nagadomi/nunif","layer":"SBS + 实时桌面","language":"Python","license":"MIT; binary distribution may be affected by FFmpeg/PyAV GPL components","stars_snapshot":3400,"forks_snapshot":280,"approximate":true,"realtime":"是","output":"SBS image/video; realtime desktop 3D; WebXR","position":"本专题最完整的落地项目：2D 图片/视频转 SBS，iw3.desktop 可把 PC 桌面实时转 3D 并通过 Wi-Fi 串流，iw3-player 在 VR 中以 WebXR 播放。"},
+    {"name":"SBS-2DTo3D","repo":"yushan777/SBS-2DTo3D","layer":"SBS 生成","language":"Python","license":"MIT","stars_snapshot":20,"forks_snapshot":8,"approximate":true,"realtime":"主要离线","output":"SBS image/video","position":"直接把 Depth Anything V2 深度接到网格/像素重投影，代码路径短，适合学习 SBS 生成原理。"},
+    {"name":"2D-to-3D-SBS-Converter","repo":"PointerSoftware/2D-to-3D-SBS-Converter","layer":"SBS 生成","language":"Python / Notebook","license":"MIT","stars_snapshot":50,"forks_snapshot":14,"approximate":true,"realtime":"离线","output":"SBS H.264 video","position":"面向普通视频的 MiDaS + Gradio 转换器，可调深度强度、会聚和眼间距。"},
+    {"name":"DepthFlow","repo":"BrokenSource/DepthFlow","layer":"视图合成","language":"Python / GLSL","license":"AGPL-3.0","stars_snapshot":1500,"forks_snapshot":120,"approximate":true,"realtime":"GPU 交互预览","output":"depth-based parallax video","position":"把 RGB + depth 变成 GPU 视差动画，适合作为深度图到新视点渲染的中间层。"},
+    {"name":"DesktopSbS","repo":"PaysPlat/DesktopSbS","layer":"Windows 桌面 SBS","language":"C#","license":"GPL-3.0","stars_snapshot":34,"forks_snapshot":5,"approximate":true,"realtime":"是","output":"SBS / top-bottom Windows desktop","position":"不依赖 AI 深度的老牌 Windows 桌面立体化参考，利用 DWM 低开销输出 SBS/TB；项目较旧但架构思路仍有价值。"},
+    {"name":"Rendepth ReShade","repo":"outmode/rendepth-reshade","layer":"游戏实时 3D","language":"ReShade FX","license":"MIT","stars_snapshot":60,"forks_snapshot":8,"approximate":true,"realtime":"是","output":"half-width SBS","position":"直接利用游戏深度缓冲的 2D→3D ReShade shader，延迟低，适合平面游戏实时双眼化。"},
+    {"name":"WibbleWobbleCore","repo":"PHARTGAMES/WibbleWobbleCore","layer":"游戏 / 显示重投影","language":"Multi-language","license":"GPL-3.0","stars_snapshot":44,"forks_snapshot":1,"approximate":true,"realtime":"是","output":"stereo reprojection / display modes","position":"连接 ReShade、SteamVR、头部追踪与立体显示输出，可把平面游戏立体化链路延伸到实际显示设备。"},
+    {"name":"VRto3D","repo":"oneup03/VRto3D","layer":"VR → 3D 显示输出","language":"C++","license":"LGPL-3.0","stars_snapshot":155,"forks_snapshot":14,"approximate":true,"realtime":"是","output":"SBS / TAB / interlaced / checkerboard / anaglyph / LeiaSR","position":"OpenVR/OpenXR 输出驱动层，把已有双眼渲染重排为多种 3D 显示格式；它不是平面游戏深度生成器，而是后端交付层。"},
+    {"name":"ReShade","repo":"crosire/reshade","layer":"游戏深度基础设施","language":"C++","license":"BSD-3-Clause","stars_snapshot":5300,"forks_snapshot":690,"approximate":true,"realtime":"是","output":"frame color + depth access + shader injection","position":"Rendepth 等实时游戏 3D shader 的基础设施：在游戏帧中获取颜色/深度并运行自定义后处理。"}
+  ],
+  "research_projects": [
+    {"name":"DepthCrafter","repo":"Tencent/DepthCrafter","layer":"视频时序深度","license":"Custom research-only; non-commercial / non-production","open_source_counted":false,"position":"长视频时间一致性深度研究项目，适合高质量离线深度生成，但许可证明确限制商业和生产使用。"},
+    {"name":"StereoCrafter","repo":"TencentARC/StereoCrafter","layer":"高质量双眼视频合成","license":"Custom research-only; non-commercial / non-production","open_source_counted":false,"position":"把视频深度、splatting 与扩散式空洞修复组合为高保真左右眼视频生成，能够输出 SBS；许可证明确限制商业和生产使用。"}
+  ],
+  "routes": [
+    {"scenario":"照片 / 单帧快速 SBS","stack":"Depth Anything V2 → SBS-2DTo3D"},
+    {"scenario":"普通视频快速转换","stack":"Video Depth Anything 或 nunif 深度 → iw3 SBS 输出"},
+    {"scenario":"桌面 / 浏览器 / 视频实时看 3D","stack":"nunif iw3.desktop → Wi-Fi stream → iw3-player / WebXR"},
+    {"scenario":"平面 PC 游戏实时双眼化","stack":"ReShade → Rendepth → SBS；需要显示重投影时加入 WibbleWobbleCore"},
+    {"scenario":"已有 VR 双眼渲染输出到 3D 显示器","stack":"OpenVR/OpenXR app → VRto3D → SBS/TAB/交错/LeiaSR"},
+    {"scenario":"电影级离线研究","stack":"DepthCrafter → StereoCrafter（研究/非商业许可）"}
+  ]
+}
