@@ -1,0 +1,41 @@
+{
+  "issue": "2026-W34",
+  "title": "Local-first 的数据库层正在成形：同步从功能变成数据架构",
+  "published_at": "2026-08-17T08:04:08+08:00",
+  "snapshot_date": "2026-08-17",
+  "source": "GitHub only: repository pages, README, commits, releases, topics and license",
+  "project_count": 7,
+  "thesis": "Local-first 正从编辑器协作技术扩展为完整数据层：CRDT 继续解决并发合并，SQLite/响应式查询承担本地权威状态，Electric 与 PowerSync 一类同步引擎负责把中心数据库安全、可增量地投射到客户端。",
+  "fact_analysis_boundary": {
+    "github_facts": "项目能力、许可证、Stars/Forks、README 描述、提交与发布信息。",
+    "editorial_analysis": "趋势判断、项目分层、风险排序、采用路线和适用团队。"
+  },
+  "map": [
+    {"layer":"CRDT 核心","projects":["automerge/automerge","yjs/yjs"],"role":"解决离线并发修改、合并与增量同步协议。"},
+    {"layer":"客户端数据库","projects":["pubkey/rxdb","livestorejs/livestore","garden-co/jazz"],"role":"把本地持久化、响应式查询、schema 与同步整合为应用数据层。"},
+    {"layer":"服务器同步桥","projects":["electric-sql/electric","powersync-ja/powersync-js"],"role":"把 Postgres/其他中心数据库的变化高效同步到客户端本地数据库。"}
+  ],
+  "projects": [
+    {"name":"Electric","repo":"electric-sql/electric","layer":"服务器同步桥","summary":"Postgres 实时同步引擎，通过 Shapes 和 HTTP API 做部分复制与扇出数据交付。","stars_snapshot":10300,"forks_snapshot":366,"approximate":true,"language":"Elixir / TypeScript","license":"Apache-2.0","activity_signal":"2026-08-14 发布 @electric-sql/client 1.5.26，修复 PostgreSQL transaction ID wraparound 后客户端漏掉 live changes 的问题。","position":"适合中心事实仍在 Postgres、但前端需要低延迟本地读模型的团队。","risk":"以读路径同步为核心；写路径、冲突策略和权限边界仍需与应用后端共同设计。"},
+    {"name":"PowerSync JS","repo":"powersync-ja/powersync-js","layer":"服务器同步桥","summary":"为 Web、React Native、Node 等客户端提供嵌入式 SQLite 与实时同步 SDK，可连接 Postgres、MongoDB、MySQL 或 SQL Server。","stars_snapshot":706,"forks_snapshot":84,"approximate":false,"language":"TypeScript","license":"Apache-2.0","activity_signal":"2026-08-13 合并 Version Packages #1064，仓库继续以 Changesets 维护多客户端 SDK 发布。","position":"适合移动端/React Native 需要 SQLite 离线体验，同时又保留既有中心数据库的产品。","risk":"需要明确服务端同步规则、上传队列与冲突处理；不同平台 SQLite 适配会增加测试矩阵。"},
+    {"name":"RxDB","repo":"pubkey/rxdb","layer":"客户端数据库","summary":"运行于多种 JavaScript runtime 的 local-first 响应式 NoSQL 数据库，提供 replication、冲突处理、加密、迁移和 CRDT 等插件。","stars_snapshot":23300,"forks_snapshot":1200,"approximate":true,"language":"TypeScript","license":"Apache-2.0","activity_signal":"2026-08-16 仍持续更新依赖；8 月上旬完成 Angular 22 兼容与 Dexie/leader-election 关闭流程修复。","position":"适合希望保留后端自由度、在浏览器/桌面/移动端统一使用响应式本地数据库的 JS 团队。","risk":"功能面宽，存储适配器和 replication plugin 的组合较多，生产环境需要固定并压测具体组合。"},
+    {"name":"LiveStore","repo":"livestorejs/livestore","layer":"客户端数据库","summary":"基于响应式 SQLite、event sourcing 和内建同步的客户端数据层，覆盖 Web、移动、服务端/Edge 与桌面。","stars_snapshot":3700,"forks_snapshot":136,"approximate":true,"language":"TypeScript","license":"Apache-2.0","activity_signal":"2026-08-11 合并 Cloudflare HTTP responseHeaders 同步客户端测试修复；仓库仍在快速迭代同步 transport。","position":"适合愿意用事件作为事实来源，并希望 Redux/MobX 类状态层升级为 SQLite 数据层的应用。","risk":"event sourcing 会改变团队调试、迁移和审计思维；应先验证事件 schema 演进与回放成本。"},
+    {"name":"Jazz","repo":"garden-co/jazz","layer":"客户端数据库","summary":"面向浏览器、React Native 与后端的 local-first relational database，可同步部分表、durable streams 和文件。","stars_snapshot":164,"forks_snapshot":17,"approximate":false,"language":"TypeScript / Rust","license":"MIT","activity_signal":"2026-08-11 合并 backend default durability tier 修复；README 明确当前为 Jazz 2.0 alpha，全新 API。","position":"适合想把关系数据、文件和实时状态统一成 local-first 模型，并接受早期 API 变化的团队。","risk":"2.0 仍为 alpha，API 与存储模型变化风险明显，不建议在无法快速升级的核心系统中直接锁定。"},
+    {"name":"Automerge","repo":"automerge/automerge","layer":"CRDT 核心","summary":"提供多种 CRDT、紧凑二进制格式与同步协议，Rust 核心通过 WASM 暴露给 JavaScript，也提供 C FFI。","stars_snapshot":6500,"forks_snapshot":262,"approximate":true,"language":"Rust","license":"MIT","activity_signal":"2026-08-12 提交 v3.4.1；README 同时指出 Automerge 3 显著降低内存使用。","position":"适合需要真正离线并发编辑、P2P/多主同步，并希望自己控制网络和持久化层的基础设施团队。","risk":"CRDT 并不会自动解决业务权限、数据删除、服务端索引和大型查询问题；文档粒度设计影响长期成本。"},
+    {"name":"Yjs","repo":"yjs/yjs","layer":"CRDT 核心","summary":"面向协作软件的共享数据类型 CRDT，网络无关，支持离线编辑、快照、Undo/Redo、shared cursors 和多种编辑器绑定。","stars_snapshot":22400,"forks_snapshot":793,"approximate":true,"language":"JavaScript","license":"MIT","activity_signal":"2026-08-06 主仓仍有合并提交；GitHub Releases 显示 v14.0.0-rc 系列在 6–7 月持续推进，稳定线仍保留 v13.6.x。","position":"适合富文本、白板、IDE、图表等协作对象，需要成熟编辑器生态与可替换 provider 的团队。","risk":"Yjs 文档模型擅长共享对象，不等同通用关系数据库；持久化、权限、server provider 和文档拆分策略需要另行设计。"}
+  ],
+  "adoption_routes": [
+    {"scenario":"已有 Postgres Web 应用，希望先做即时本地读取","route":"Postgres → Electric → 客户端缓存/本地集合","why":"先把同步限制为 read-path，改造半径最小。"},
+    {"scenario":"React Native / 离线移动应用","route":"中心数据库 → PowerSync → SQLite → UI","why":"把断网写入和本地 SQL 查询放在客户端，恢复网络后同步。"},
+    {"scenario":"纯 JS 多平台应用，希望后端可替换","route":"RxDB → 选定 storage + replication adapter","why":"本地数据库能力完整，复制后端选择空间大。"},
+    {"scenario":"状态复杂且希望事件可追溯","route":"LiveStore → SQLite materializer → sync backend","why":"用 event sourcing 统一本地状态变化与同步。"},
+    {"scenario":"富文本/白板/IDE 多人协作","route":"Yjs 或 Automerge → 自选 provider / persistence","why":"直接从 CRDT 解决并发编辑，而不是先引入关系型同步。"},
+    {"scenario":"愿意尝试新一代一体化 local-first 数据层","route":"Jazz 2.0 alpha 小范围试点","why":"关系数据、stream、文件与同步在一个模型中，但需接受 API 变化。"}
+  ],
+  "risks": [
+    "不要把 local-first 等同于无服务端：认证、权限、备份、全局索引和合规仍通常需要中心基础设施。",
+    "冲突合并不是唯一难点；schema 演进、删除语义、附件、权限撤销和长期数据压缩更容易在上线后暴露。",
+    "CRDT 文档与 SQLite/关系型 local database 是不同抽象，选型应从数据形态出发，而不是追求统一技术栈。",
+    "同步系统必须做断网、重复消息、乱序、设备时钟、长离线周期与超大数据集测试。"
+  ]
+}
