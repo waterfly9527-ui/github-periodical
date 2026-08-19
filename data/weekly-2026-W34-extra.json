@@ -1,0 +1,24 @@
+{
+  "issue": "2026-W34-extra",
+  "edition_type": "extra",
+  "title": "深度估计进入视频时代：10 个带开源权重的 Image & Video Depth 项目",
+  "published_at": "2026-08-19T17:00:00+08:00",
+  "snapshot_date": "2026-08-19",
+  "scope": "Recent ~3 years image/video depth estimation; requires paper + official/author GitHub + released model weights",
+  "project_count": 10,
+  "hard_filter": ["paper/publication available", "official or author GitHub repository", "released downloadable model weights/checkpoints"],
+  "projects": [
+    {"name":"Depth Anything V2","repo":"DepthAnything/Depth-Anything-V2","venue":"NeurIPS 2024","modality":"Image","depth":"Relative + Metric","family":"Foundation / Transformer","weights":"Small / Base / Large；另有 indoor/outdoor metric checkpoints","paper":"https://arxiv.org/abs/2406.09414"},
+    {"name":"Depth Pro","repo":"apple/ml-depth-pro","venue":"ICLR 2025","modality":"Image","depth":"Metric","family":"Metric monocular","weights":"Apple 官方 checkpoint","paper":"https://arxiv.org/abs/2410.02073"},
+    {"name":"UniDepth V2","repo":"lpiccinelli-eth/UniDepth","venue":"2025 / arXiv","modality":"Image","depth":"Metric + Intrinsics","family":"Metric geometry","weights":"ViT-S / ViT-B / ViT-L（Hugging Face / TorchHub）","paper":"https://arxiv.org/abs/2502.20110"},
+    {"name":"Metric3D V2","repo":"YvanYin/Metric3D","venue":"TPAMI 2024","modality":"Image","depth":"Metric + Normal","family":"Geometry foundation","weights":"ViT-S / ViT-L / ViT-Giant2；PyTorch Hub / ONNX","paper":"https://arxiv.org/abs/2404.15506"},
+    {"name":"Marigold","repo":"prs-eth/Marigold","venue":"CVPR 2024 Oral","modality":"Image","depth":"Affine-invariant","family":"Diffusion","weights":"marigold-depth-v1-0 / v1-1 等","paper":"https://arxiv.org/abs/2312.02145"},
+    {"name":"DepthFM","repo":"CompVis/depth-fm","venue":"AAAI 2025 Oral","modality":"Image","depth":"Affine-invariant","family":"Flow Matching","weights":"depthfm-v1.ckpt","paper":"https://arxiv.org/abs/2403.13788"},
+    {"name":"Video Depth Anything","repo":"DepthAnything/Video-Depth-Anything","venue":"CVPR 2025 Highlight","modality":"Video","depth":"Relative + Metric","family":"Temporal Transformer","weights":"Relative S/B/L + Metric S/B/L","paper":"https://arxiv.org/abs/2501.12375"},
+    {"name":"RollingDepth","repo":"prs-eth/RollingDepth","venue":"CVPR 2025","modality":"Video","depth":"Relative","family":"Image diffusion + registration","weights":"rollingdepth-v1-0（Hugging Face / download script）","paper":"https://arxiv.org/abs/2411.19189"},
+    {"name":"DepthCrafter","repo":"Tencent/DepthCrafter","venue":"CVPR 2025 Highlight","modality":"Video","depth":"Relative","family":"Video Diffusion","weights":"DepthCrafter Hugging Face Model Zoo","paper":"https://arxiv.org/abs/2409.02095"},
+    {"name":"Depth Any Video","repo":"Nightmare-n/DepthAnyVideo","venue":"ICLR 2025","modality":"Image + Video","depth":"Relative","family":"Video diffusion / synthetic data","weights":"官方预训练模型用于 run_infer.py","paper":"https://arxiv.org/abs/2410.10815"}
+  ],
+  "baseline_groups": {"single_image":["Depth Anything V2","Depth Pro","UniDepth V2"],"generative_image":["Marigold","DepthFM"],"video":["Video Depth Anything","RollingDepth","DepthCrafter"],"per_frame_control":["Depth Anything V2"]},
+  "notes": ["Relative/affine-invariant and metric depth should not be mixed without an explicit alignment protocol.","Model weights being public does not imply commercial-use permission; check model licenses separately.","Video speed comparisons depend strongly on resolution, clip length, dtype and hardware.","Video evaluation should include temporal consistency/flicker metrics in addition to framewise depth metrics."]
+}
