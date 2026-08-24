@@ -1,0 +1,107 @@
+{
+  "issue": "2026-W35",
+  "title": "WASM 正在成为插件、边缘与 Agent 工具的通用沙箱",
+  "published_at": "2026-08-24T08:04:00+08:00",
+  "snapshot_date": "2026-08-24",
+  "source": "GitHub only: repository pages, README, commits, releases, issues and license files",
+  "project_count": 9,
+  "thesis": "WebAssembly 的采用重心正在从浏览器内执行，转向可嵌入运行时、Component Model/WIT 接口、插件系统、Serverless/Edge 以及 Agent 工具隔离。共同变化不是‘都使用 Wasm’，而是宿主开始用能力授权和稳定接口来控制第三方代码，而不是直接加载进程内动态库或完整容器。",
+  "facts_vs_analysis": {
+    "github_facts": "Stars/Forks、语言、License、README 声明、GitHub Commits/Releases 与仓库状态。",
+    "editorial_analysis": "趋势判断、分层版图、风险、项目之间的替代关系和团队采用路径。"
+  },
+  "landscape": [
+    {"layer":"运行时与隔离","description":"把不可信或多语言代码装进可嵌入沙箱。","repos":["bytecodealliance/wasmtime","wasmerio/wasmer"]},
+    {"layer":"Component Model 工具链","description":"用 WIT 描述接口，并生成绑定、检查和转换组件。","repos":["bytecodealliance/wasm-tools","bytecodealliance/wit-bindgen","bytecodealliance/jco"]},
+    {"layer":"应用插件与 Agent 工具","description":"把 Wasm 封装成宿主可加载的插件或 MCP 能力。","repos":["extism/extism","microsoft/wassette"]},
+    {"layer":"Serverless / Edge 平台","description":"把组件提升为可部署、可伸缩的服务单元。","repos":["spinframework/spin","wasmCloud/wasmCloud"]}
+  ],
+  "projects": [
+    {
+      "name":"Wasmtime","repo":"bytecodealliance/wasmtime","layer":"运行时与隔离","language":"Rust","license":"Apache-2.0 WITH LLVM-exception","stars_snapshot":18500,"forks_snapshot":1800,"approximate":true,
+      "summary":"Bytecode Alliance 的轻量 WebAssembly/WASI 运行时，基于 Cranelift，支持 JIT/AOT 与 Component Model。",
+      "position":"更适合作为产品内部的受控执行引擎，而不是完整应用平台。",
+      "activity_signal":"2026-08-21 合并 #14151，修复 cranelift-module 的 no_std 构建并加入 CI 覆盖。",
+      "risk":"运行时沙箱不是完整权限模型；文件、网络、时钟等宿主能力仍需显式设计和最小授权。",
+      "url":"https://github.com/bytecodealliance/wasmtime"
+    },
+    {
+      "name":"Wasmer","repo":"wasmerio/wasmer","layer":"运行时与隔离","language":"Rust","license":"MIT","stars_snapshot":20900,"forks_snapshot":991,"approximate":true,
+      "summary":"跨桌面、云、边缘和浏览器的 WebAssembly 运行时，提供 WASI/WASIX 与多语言 SDK。",
+      "position":"适合希望运行时、包分发和边缘部署保持在同一生态中的团队。",
+      "activity_signal":"2026-08-21 合并 #6919，重构 release 相关脚本；主仓库继续维护。",
+      "risk":"WASIX 扩展能力强，但采用前应确认与纯 WASI/Component Model 的可移植性边界。",
+      "url":"https://github.com/wasmerio/wasmer"
+    },
+    {
+      "name":"wasm-tools","repo":"bytecodealliance/wasm-tools","layer":"Component Model 工具链","language":"Rust","license":"Apache-2.0 / Apache-2.0 WITH LLVM-exception / MIT","stars_snapshot":1800,"forks_snapshot":345,"approximate":true,
+      "summary":"验证、解析、打印、组件化、WIT 检查与低层 Wasm 操作的 CLI/库集合。",
+      "position":"是 Component Model 工程链路里的检查器和瑞士军刀，适合放进 CI。",
+      "activity_signal":"2026-08-21 修复 stream/future cancel intrinsic 的组件类型索引重映射；7 月发布 v1.254.0 时也包含多项 Component Model 校验修复。",
+      "risk":"底层规范持续演进，组件相关 crate 的 API 兼容性不能按成熟稳定库假设。",
+      "url":"https://github.com/bytecodealliance/wasm-tools"
+    },
+    {
+      "name":"wit-bindgen","repo":"bytecodealliance/wit-bindgen","layer":"Component Model 工具链","language":"Rust","license":"Apache-2.0 / Apache-2.0 WITH LLVM-exception / MIT","stars_snapshot":1400,"forks_snapshot":281,"approximate":true,
+      "summary":"从 WIT 接口为 Rust、C/C++、C#、Go 等 guest 语言生成 Component Model 绑定。",
+      "position":"把多语言插件接口从手写 ABI 提升成可生成、可检查的 IDL 合约。",
+      "activity_signal":"2026-08-21 合并 #1561，新增 D guest bindings generator，并补齐 CI/运行时测试。",
+      "risk":"0.x 版本仍可能产生 API breaking change；应把 WIT 接口版本化并在 CI 固定生成器版本。",
+      "url":"https://github.com/bytecodealliance/wit-bindgen"
+    },
+    {
+      "name":"jco","repo":"bytecodealliance/jco","layer":"Component Model 工具链","language":"Rust / JavaScript","license":"Apache-2.0","stars_snapshot":977,"forks_snapshot":132,"approximate":true,
+      "summary":"面向 JavaScript 的 WebAssembly Component 工具链，可转译组件并在浏览器或 Node.js 宿主中运行。",
+      "position":"连接 Component Model 与现有 JS 生态，降低‘组件只能跑在专用 Wasm Runtime’的门槛。",
+      "activity_signal":"2026-08-23 主分支发布 preview3-shim v0.5.0。",
+      "risk":"Preview3/WASI 新接口仍在快速推进，浏览器与 Node 的宿主能力实现需要额外兼容测试。",
+      "url":"https://github.com/bytecodealliance/jco"
+    },
+    {
+      "name":"Extism","repo":"extism/extism","layer":"应用插件与 Agent 工具","language":"Rust","license":"BSD-3-Clause","stars_snapshot":5700,"forks_snapshot":165,"approximate":true,
+      "summary":"用 WebAssembly 构建安全插件系统的框架，宿主和插件支持多种编程语言。",
+      "position":"对已有产品最现实的切入点之一：不必重写主应用，只把第三方扩展迁入 Wasm 插件边界。",
+      "activity_signal":"2026-07-16 合并 #908，修复 Python extism_sys 多架构 wheel 发布竞态。",
+      "risk":"插件 ABI、宿主函数和状态模型仍由产品负责；不能因为用了 Wasm 就忽略扩展 API 的长期兼容。",
+      "url":"https://github.com/extism/extism"
+    },
+    {
+      "name":"Wassette","repo":"microsoft/wassette","layer":"应用插件与 Agent 工具","language":"Rust","license":"MIT","stars_snapshot":935,"forks_snapshot":72,"approximate":false,
+      "summary":"微软的安全导向运行时，通过 MCP 让 AI Agent 加载并执行 WebAssembly Components。",
+      "position":"把 Component Model 的能力隔离直接落到 Agent 工具供应链，是本周最值得观察的新应用方向。",
+      "activity_signal":"2026-08-18~20 连续升级 wasmparser/wat 等生产依赖；README 明确标注 early development、尚未 production ready。",
+      "risk":"仍处早期阶段；OCI 来源信任、组件权限清单、网络/文件能力和 Agent 自动加载策略必须额外治理。",
+      "url":"https://github.com/microsoft/wassette"
+    },
+    {
+      "name":"Spin","repo":"spinframework/spin","layer":"Serverless / Edge 平台","language":"Rust","license":"Apache-2.0","stars_snapshot":6500,"forks_snapshot":309,"approximate":true,
+      "summary":"构建、运行和部署 WebAssembly Serverless/微服务应用的开发框架，基于 Wasmtime 与 Component Model。",
+      "position":"适合把 HTTP/事件型轻服务直接建成组件，而不是先把普通服务塞进容器。",
+      "activity_signal":"2026-08-20 合并 #3655，将 OCI tar 路径切换到 async tokio 实现。",
+      "risk":"适用负载与传统容器并不完全重叠；数据库驱动、原生依赖和长生命周期进程需要先做兼容验证。",
+      "url":"https://github.com/spinframework/spin"
+    },
+    {
+      "name":"wasmCloud","repo":"wasmCloud/wasmCloud","layer":"Serverless / Edge 平台","language":"Rust","license":"Apache-2.0","stars_snapshot":2400,"forks_snapshot":255,"approximate":true,
+      "summary":"CNCF 项目，用 WebAssembly Components 构建可跨云、Kubernetes 与 Edge 管理的多语言应用。",
+      "position":"关注点从单进程沙箱上移到分布式组件编排、能力提供者和跨环境部署。",
+      "activity_signal":"2026-08-20 修复 RUSTSEC-2026-0258，升级 h2 以避免空 DATA frame 导致的无界内存增长。",
+      "risk":"平台层复杂度显著高于单 runtime；只有需要跨节点调度、能力链接和边缘分发时才值得承担。",
+      "url":"https://github.com/wasmCloud/wasmCloud"
+    }
+  ],
+  "routes": [
+    {"scenario":"给现有桌面/服务端产品增加第三方插件","recommendation":"Extism → 必要时下沉 Wasmtime","reason":"先拿到插件 SDK 和多语言体验，再决定是否直接管理 runtime。"},
+    {"scenario":"建立跨语言稳定插件 ABI","recommendation":"WIT + wit-bindgen + wasm-tools","reason":"把接口、类型与兼容检查放进源码和 CI，而不是依赖手写 C ABI。"},
+    {"scenario":"给 Agent/MCP 工具加隔离层","recommendation":"Wassette + OCI 组件白名单","reason":"把工具执行放进 Wasm Component 沙箱，并把能力许可显式化。"},
+    {"scenario":"开发轻量 HTTP / 事件服务","recommendation":"Spin","reason":"组件构建、运行、分发路径更完整，适合快速验证 Serverless Wasm。"},
+    {"scenario":"跨云/K8s/边缘调度组件","recommendation":"wasmCloud","reason":"当需求已经超出单机运行时，再引入分布式控制面。"},
+    {"scenario":"需要自己的底层沙箱/执行引擎","recommendation":"Wasmtime 或 Wasmer","reason":"直接控制内存、燃料、epoch、宿主能力和嵌入 API。"}
+  ],
+  "risks": [
+    "Wasm 沙箱只解决一部分隔离问题；真正的安全边界还包括宿主函数、网络、文件、凭证和组件来源。",
+    "Component Model/WASI Preview3 仍在演进，应锁定工具版本并对 WIT 接口做显式版本管理。",
+    "把传统容器工作负载机械迁移成 Wasm 通常收益有限；更适合插件、短任务、边缘函数和能力受限工具。",
+    "多语言并不自动等于低运维成本；Guest SDK、调试、可观测性和崩溃诊断仍需要平台建设。"
+  ]
+}
