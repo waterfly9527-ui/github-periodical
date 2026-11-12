@@ -5,7 +5,7 @@
   "source": "GitHub only: official repository README, LICENSE, repository pages, latest commits and GitHub Trending discovery",
   "snapshot_notice": "This weekly snapshot intentionally omits Stars/Forks ranking; project fit is evaluated by capability, license, status, recent commit signal and adoption boundary.",
   "deduplication": {
-    "window": "previous published weekly issues",
+    "window": "previous published weekly issues with available structured data",
     "compared_issues": [
       "2026-W39",
       "2026-W38",
@@ -15,9 +15,10 @@
       "2026-W34-extra",
       "2026-W33",
       "2026-W33-extra",
-      "2026-W32",
       "2026-W32-extra"
     ],
+    "historical_repository_count": 72,
+    "candidate_repository_count": 8,
     "exact_duplicate_repositories": [],
     "exact_repository_overlap": 0
   },
