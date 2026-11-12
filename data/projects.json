@@ -1,1 +1,179 @@
-{"version":"2026-09-11","snapshot_date":"2026-09-11","updated_at":"2026-09-11T10:00:00Z","source":"GitHub only: Trending/Search, repository pages, README, Issues/PR, Commits, Releases, Topics and License","snapshot_notice":"Stars/Forks are generation-time GitHub repository snapshots captured on 2026-09-11.","deduplication":{"window":"previous 7 days","window_start":"2026-09-04","window_end":"2026-09-10","compared_issues":["2026-09-07","2026-09-08","2026-09-10"],"historical_repository_count":18,"candidate_repository_count":7,"exact_duplicate_repositories":[],"exact_repository_overlap":0,"revisit_projects":[],"ai_project_count":0,"ai_share":0,"distinct_category_count":7},"projects":[{"name":"Ansible","repo":"ansible/ansible","category":"IT 自动化","language":"Python","license":"GPL-3.0","stars_snapshot":70648,"forks_snapshot":24334,"summary":"无代理的 IT 自动化平台，可用接近自然语言的声明式方式完成应用部署、系统配置、网络配置与云资源管理。","recommendation":"适合希望减少远端 Agent 运维成本、把基础设施操作标准化为可审计自动化任务的团队。","audience":"运维、SRE、平台工程、网络工程与混合云团队。","capabilities":["基于 SSH 的无代理自动化","配置管理与应用部署","网络与云资源编排"],"activity_signal":"2026-09-10 主线合入新的 Secret Masking API，可注册并在输出、日志和回调数据中统一脱敏敏感值。","url":"https://github.com/ansible/ansible"},{"name":"Neovim","repo":"neovim/neovim","category":"代码编辑器","language":"Vim Script","license":"NOASSERTION（GitHub）","stars_snapshot":102262,"forks_snapshot":7105,"summary":"强调可扩展性与可用性的 Vim 分支，提供 Lua、LSP、异步任务和丰富 API，适合作为高度可定制的终端编辑器核心。","recommendation":"希望在终端中获得现代 LSP、插件生态和脚本能力，同时保留 Vim 工作流的开发者值得持续关注。","audience":"终端开发者、编辑器插件作者、Vim 用户与追求键盘工作流的工程师。","capabilities":["内置 LSP 客户端与 Lua API","异步任务与终端集成","高度可扩展的编辑器核心"],"activity_signal":"2026-09-11 连续合入异步 healthcheck 与 LSP 异步格式化 timeout_ms 支持，并修复 Windows 终端测试稳定性。","url":"https://github.com/neovim/neovim"},{"name":"Home Assistant Core","repo":"home-assistant/core","category":"智能家居 / IoT","language":"Python","license":"Apache-2.0","stars_snapshot":90371,"forks_snapshot":38567,"summary":"以本地控制和隐私优先为核心的开源家庭自动化平台核心，覆盖大量设备与服务集成。","recommendation":"需要把不同品牌设备接入统一自动化平台，并希望数据与控制尽量留在本地时，它是成熟的开源选择。","audience":"智能家居用户、IoT 开发者、家庭实验室和设备集成团队。","capabilities":["本地优先的家庭自动化","大量 IoT/设备集成","事件、实体与自动化模型"],"activity_signal":"2026-09-11 主线新增割草机器人 idle 状态与 stop 动作，并持续改进设备协调器和可用性处理。","url":"https://github.com/home-assistant/core"},{"name":"Prometheus","repo":"prometheus/prometheus","category":"监控 / 时序数据库","language":"Go","license":"Apache-2.0","stars_snapshot":66038,"forks_snapshot":10827,"summary":"面向指标采集、查询与告警的监控系统和时序数据库，是云原生可观测性生态的重要基础组件。","recommendation":"需要自主掌控指标采集、PromQL 查询和告警链路的 SRE/平台团队，可以把它作为监控体系基线。","audience":"SRE、平台工程、云原生团队、运维与可观测性工程师。","capabilities":["拉取式指标采集与时序存储","PromQL 查询","告警与联邦能力"],"activity_signal":"2026-09-11 合并 federation 浮点直方图保留修复，并增强 TSDB append-ID watermark 检查的持久性。","url":"https://github.com/prometheus/prometheus"},{"name":"Tailscale","repo":"tailscale/tailscale","category":"安全组网 / VPN","language":"Go","license":"BSD-3-Clause","stars_snapshot":36354,"forks_snapshot":3177,"summary":"基于 WireGuard 的安全组网项目，结合身份认证与点对点连接，让设备间私有网络配置更简单。","recommendation":"远程开发、家庭实验室或多云环境需要低运维成本的私网互联时，Tailscale 的 WireGuard 与身份体系组合很实用。","audience":"远程团队、DevOps、家庭实验室、多云与边缘设备使用者。","capabilities":["WireGuard 点对点安全连接","SSO/OAuth/2FA 身份集成","跨网络设备发现与访问"],"activity_signal":"2026-09-11 持续清理 CI 日志；近期还收紧 DNS 缓存逻辑，仅在 TLS 验证后持久化解析结果。","url":"https://github.com/tailscale/tailscale"},{"name":"pandas","repo":"pandas-dev/pandas","category":"数据分析","language":"Python","license":"BSD-3-Clause","stars_snapshot":49717,"forks_snapshot":20364,"summary":"Python 数据分析与数据处理核心库，提供带标签的数据结构、时间序列和丰富的数据清洗、聚合能力。","recommendation":"需要处理表格、时间序列和数据清洗任务的 Python 团队，它仍是生态中最通用、成熟的基础层之一。","audience":"数据分析师、数据科学家、Python 开发者与数据工程师。","capabilities":["DataFrame/Series 数据结构","清洗、聚合与重塑","时间序列与统计操作"],"activity_signal":"2026-09-11 连续修复 StringArray reduction 绕过 string-dtype gate、Timedelta 与无穷大相乘返回行为等边界问题。","url":"https://github.com/pandas-dev/pandas"},{"name":"Ruff","repo":"astral-sh/ruff","category":"Python 工具链","language":"Rust","license":"MIT","stars_snapshot":49583,"forks_snapshot":2404,"summary":"用 Rust 编写的高速 Python linter 与 formatter，目标是用一个工具覆盖大量传统静态检查和格式化工作流。","recommendation":"希望缩短 CI 静态检查时间、简化 Python lint/format 工具链的团队，Ruff 的性能与整合度很有吸引力。","audience":"Python 团队、CI/开发工具维护者、代码质量平台与大型单仓库。","capabilities":["高速 Python lint","代码格式化","大量规则与生态兼容"],"activity_signal":"2026-09-11 ty playground 新增 inlay hints 切换命令，并修复循环 re-export 场景下的错误 invalid-assignment 诊断。","url":"https://github.com/astral-sh/ruff"}]}
+{
+  "version": "2026-W46",
+  "snapshot_date": "2026-11-12",
+  "updated_at": "2026-11-12T01:01:00Z",
+  "source": "GitHub only: official repository README, LICENSE, repository pages, latest commits and GitHub Trending discovery",
+  "snapshot_notice": "This weekly snapshot intentionally omits Stars/Forks ranking; project fit is evaluated by capability, license, status, recent commit signal and adoption boundary.",
+  "deduplication": {
+    "window": "previous published weekly issues",
+    "compared_issues": [
+      "2026-W39",
+      "2026-W38",
+      "2026-W36",
+      "2026-W35",
+      "2026-W34",
+      "2026-W34-extra",
+      "2026-W33",
+      "2026-W33-extra",
+      "2026-W32",
+      "2026-W32-extra"
+    ],
+    "exact_duplicate_repositories": [],
+    "exact_repository_overlap": 0
+  },
+  "project_count": 8,
+  "projects": [
+    {
+      "name": "REA · Reverse Engineer Anything",
+      "repo": "morluto/rea",
+      "category": "理解既有软件",
+      "language": "TypeScript",
+      "license": "MIT",
+      "summary": "通过 MCP 把逆向分析工具交给 Agent：检查网站、JavaScript/Electron 应用、.NET 程序集与原生二进制，解释功能如何工作，并尽量给出可追溯的分析证据。",
+      "recommendation": "软件理解 / 逆向分析入口",
+      "audience": "维护遗留系统、做兼容性分析、研究应用行为或需要从现有产品提炼需求的工程团队。",
+      "capabilities": [
+        "面向二进制、应用和运行时行为的统一 MCP 工具入口",
+        "覆盖 JavaScript/Electron、.NET、网站和原生二进制",
+        "可从终端或 Agent 工作流调用，分析时不要求目标项目提供源码"
+      ],
+      "activity_signal": "fix(pe): honor import directory bounds (#10044)",
+      "activity_url": "https://github.com/morluto/rea/commit/047d75a498f18a6608f35ee5e36cf1bf0f81ca97",
+      "caution": "仅对有权分析的软件使用；混淆、加密、反调试和平台差异会影响结果。逆向分析结果不是原始设计文档，也不能替代对知识产权与许可边界的判断。",
+      "url": "https://github.com/morluto/rea"
+    },
+    {
+      "name": "Craft Anything",
+      "repo": "storytold/craft-anything",
+      "category": "理解并重建产品",
+      "language": "Rust",
+      "license": "MIT OR Apache-2.0",
+      "summary": "把网站、桌面应用、手机应用、游戏或文件作为研究对象，调用真实检查工具理解其行为，再让编码 Agent 构建一个新的实现，并对照原始目标检查和迭代。",
+      "recommendation": "参考产品研究 → clean-room 重建",
+      "audience": "产品原型、兼容性实现、界面复刻研究和跨平台应用开发者。",
+      "capabilities": [
+        "以实际检查工具研究网站、应用、游戏与文件",
+        "让编码 Agent 从分析结果生成独立项目",
+        "通过对照检查发现差异，再继续修正"
+      ],
+      "activity_signal": "Add Help > Check for Updates and bump to 0.6.1 (#1706)",
+      "activity_url": "https://github.com/storytold/craft-anything/commit/5b3f1d818f1ec3c0d7a760af1168ad68f7badf08",
+      "caution": "项目 README 明确标注 early alpha；复杂交互、账号体系和服务端行为未必能被完整重建。clean-room 实现不自动免除版权、商标、数据保护或服务条款责任。",
+      "url": "https://github.com/storytold/craft-anything"
+    },
+    {
+      "name": "Agent Skills · Addy Osmani",
+      "repo": "addyosmani/agent-skills",
+      "category": "开发流程规范",
+      "language": "JavaScript / Markdown",
+      "license": "MIT",
+      "summary": "把资深工程师的工作方法打包成可复用 Skills：从需求澄清、规格和计划，到增量实现、测试、代码审查、性能审计与发布。",
+      "recommendation": "把工程流程变成 Agent 可重复执行的工作规范",
+      "audience": "希望多个编码 Agent 遵循同一套工程质量门槛的个人开发者和团队。",
+      "capabilities": [
+        "9 个生命周期命令，覆盖 spec、plan、build、test、review、ship 等阶段",
+        "README 列出 25 个 Skills，可按任务自动触发",
+        "通过 skills CLI 安装到多种编码 Agent 环境"
+      ],
+      "activity_signal": "Merge #736: validate review findings against code and baseline",
+      "activity_url": "https://github.com/addyosmani/agent-skills/commit/301b02b12bff98e4688e6984af6556802322bbde",
+      "caution": "Skill 是指令与脚本集合，不是沙箱或权限系统；命令是否安全仍取决于 Agent 宿主、工具权限和人工审批。单独安装 Skill 时需留意 README 提到的共享 references 路径限制。",
+      "url": "https://github.com/addyosmani/agent-skills"
+    },
+    {
+      "name": "T3 Code",
+      "repo": "pingdotgg/t3code",
+      "category": "Agent 控制台",
+      "language": "TypeScript",
+      "license": "MIT",
+      "summary": "一个 agent harness control surface：在本机运行编码 Agent，通过桌面端、Web 或手机控制 Claude Code、Codex、Cursor、OpenCode 等本地 CLI。",
+      "recommendation": "多 Agent 会话控制与远程入口",
+      "audience": "同时使用多个编码 Agent、需要从手机观察或接续本机开发任务的开发者。",
+      "capabilities": [
+        "连接多种本机 Agent CLI，不把模型供应商锁定在单一产品",
+        "提供 Web、Electron 桌面和 iOS/Android 控制入口",
+        "支持本地服务常驻、机器关联与远程访问配置"
+      ],
+      "activity_signal": "fix(mobile): the Link a machine sheet scrolls on Android (#34659)",
+      "activity_url": "https://github.com/pingdotgg/t3code/commit/6b1d9d5c30573e16272ff4ee8714ad5eb468fdf9",
+      "caution": "它本身不是模型，也不会替代各 Agent 的账号与订阅。远程控制意味着本机代码和命令执行面被暴露，必须限制可信设备、网络入口和本地权限。",
+      "url": "https://github.com/pingdotgg/t3code"
+    },
+    {
+      "name": "Astryx",
+      "repo": "meta/astryx",
+      "category": "前端实现基座",
+      "language": "TypeScript",
+      "license": "MIT",
+      "summary": "Meta 发布的 React 设计系统，基于 React 19+ 与 StyleX，提供 150+ 可访问组件、主题、模板、Storybook 和 CLI，目标是让人和 Agent 使用同一套组件接口。",
+      "recommendation": "Agent 生成前端界面的设计系统与组件基座",
+      "audience": "React 产品团队、设计系统维护者，以及希望减少 Agent 自创 UI 组件的团队。",
+      "capabilities": [
+        "150+ 可访问 React 组件和品牌主题能力",
+        "CLI、文档和 Storybook 面向人类与编码 Agent 一起设计",
+        "组件可组合、可深入定制，避免只能使用封闭的高层封装"
+      ],
+      "activity_signal": "perf(docsite): serve template preview images through the image optimizer (#11320)",
+      "activity_url": "https://github.com/meta/astryx/commit/d084760dba01c5fbe3c5013a83f42f8b7c9b5f8f",
+      "caution": "项目仍处 Beta，且要求 React 19 或更高版本；采用前要检查现有设计系统、样式方案和组件可访问性测试是否兼容。",
+      "url": "https://github.com/meta/astryx"
+    },
+    {
+      "name": "agent-browser",
+      "repo": "vercel-labs/agent-browser",
+      "category": "浏览器操作与验证",
+      "language": "Rust",
+      "license": "Apache-2.0",
+      "summary": "面向 AI Agent 的原生 Rust 浏览器自动化 CLI。把页面转成紧凑的可访问性树，为元素分配引用标识，再通过命令行点击、输入、导航并读取结果。",
+      "recommendation": "把浏览器变成 Agent 可操作、可检查的工具",
+      "audience": "Web 应用验收、端到端测试、自动化表单和需要浏览器证据的 Agent 工作流。",
+      "capabilities": [
+        "通过 accessibility snapshot 获取页面结构和可交互元素引用",
+        "基于 Chrome DevTools Protocol 的常驻后台进程与独立 session",
+        "可连接本机 Chrome、iOS Simulator 或受支持的云浏览器"
+      ],
+      "activity_signal": "Match Modern Web Guidance examples to command output (#2575)",
+      "activity_url": "https://github.com/vercel-labs/agent-browser/commit/51b6f8a40c6f1b330f4f2021b1af154ebc6be464",
+      "caution": "DOM 变化或页面导航后，旧 snapshot 引用会失效，必须重新读取页面；登录态、支付、删除等有副作用的操作应使用隔离测试账号和人工确认。",
+      "url": "https://github.com/vercel-labs/agent-browser"
+    },
+    {
+      "name": "Cloudflare Security Audit Skill",
+      "repo": "cloudflare/security-audit-skill",
+      "category": "安全审计与证据",
+      "language": "JavaScript / Markdown",
+      "license": "MIT",
+      "summary": "把编码 Agent 组织成多阶段安全审计流程：先做架构侦察和覆盖登记，再分工寻找问题、独立验证候选项，最后生成结构化 findings 与报告。",
+      "recommendation": "可审计、可追踪的 Agent 安全审计流程",
+      "audience": "希望把 Agent 安全审计纳入代码评审、漏洞排查和安全工程流程的团队。",
+      "capabilities": [
+        "六阶段工作流：侦察、覆盖驱动 hunting、候选验证、结构化输出、独立复核、报告",
+        "使用 coverage ledger 与 findings JSON schema 记录覆盖和证据",
+        "对 confirmed、needs_validation、rejected 采用不同结论状态"
+      ],
+      "activity_signal": "Clarify guidance and full audit modes",
+      "activity_url": "https://github.com/cloudflare/security-audit-skill/commit/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "caution": "这是可组合的审计 Skill，不是开箱即用的完整安全平台；扫描深度依赖目标代码、Agent 能力和覆盖质量。它不能证明未发现漏洞，也不能替代人工安全评审。",
+      "url": "https://github.com/cloudflare/security-audit-skill"
+    },
+    {
+      "name": "Codex Security",
+      "repo": "openai/codex-security",
+      "category": "漏洞验证与修复",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "summary": "OpenAI 发布的安全 CLI 与 TypeScript SDK，可扫描仓库、选定路径或 Git diff，验证候选漏洞、生成修复补丁并复查已有修复。",
+      "recommendation": "从漏洞发现走到补丁和修复验证",
+      "audience": "需要在本地、CI 或多仓库项目中持续运行安全检查的工程与 AppSec 团队。",
+      "capabilities": [
+        "Standard / Deep scan，支持仓库、路径和变更范围扫描",
+        "候选 finding 验证、补丁生成、已有修复复核",
+        "CLI、TypeScript SDK、GitHub Action；可导出 SARIF、JSON、CSV 并连接 issue tracker"
+      ],
+      "activity_signal": "feat(scans): resume interrupted Standard scans (#2610)",
+      "activity_url": "https://github.com/openai/codex-security/commit/69038a2f56514f2d4fab43683c97cd313dc5cecb",
+      "caution": "需要按 README 配置运行环境和认证；扫描结论要结合报告中的范围、排除项和源代码证据复核。自动补丁应先在隔离分支运行测试，不能直接部署。",
+      "url": "https://github.com/openai/codex-security"
+    }
+  ]
+}
