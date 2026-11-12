@@ -48,7 +48,7 @@ footer{padding:35px 0 58px;color:var(--muted);font-size:.84rem}
 <div class="kicker">WEEKLY · 2026-W46 · 2026-11-12</div>
 <h1>Agent 正在接管软件交付闭环：从理解系统到验证上线</h1>
 <p class="lead">AI 编程工具的分水岭，正在从“能不能写出代码”转向“能不能理解已有系统、遵循工程流程、操作真实界面，并拿出可复核的交付证据”。本期沿着软件生产链路，拆解 8 个值得放进技术雷达的开源项目。</p>
-<div class="pills"><span class="pill">8 个项目</span><span class="pill">5 个技术环节</span><span class="pill">理解 → 规划 → 构建 → 验收 → 安全</span><span class="pill">MIT / Apache-2.0</span></div>
+<div class="pills"><span class="pill">8 个项目</span><span class="pill">5 个技术环节</span><span class="pill">理解 → 规划 → 构建 → 验收 → 安全</span><span class="pill">MIT / Apache-2.0</span><span class="pill">0 仓库重复 · 对照 72 个历史项目</span></div>
 <div class="spotlight"><b>本期判断：</b>Agent 的能力边界不再只由模型决定，而由它能否接入可靠的工具、受控的执行环境、真实的测试反馈和独立验证机制共同决定。</div>
 </div></div></section>
 
@@ -106,7 +106,7 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){retur
 function makeCard(p){
  const avatar="https://github.com/"+p.repo.split("/")[0]+".png";
  return '<article class="card" id="'+esc(p.id)+'">'+
- '<div class="card-top"><div class="mark"><span>'+esc(p.mark)+'</span><img src="'+avatar+'" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>'+
+ '<div class="card-top"><div class="mark"><span>'+esc(p.mark)+'</span><img src="'+avatar+'" alt="" loading="lazy" onerror="this.remove()"></div>'+
  '<div class="card-title"><h3>'+esc(p.name)+'</h3><div class="repo">'+esc(p.repo)+'</div></div><span class="layer">'+esc(p.layer)+'</span></div>'+
  '<div class="card-body"><p class="desc">'+esc(p.summary)+'</p>'+
  '<div class="meta"><span>'+esc(p.language)+'</span><span>'+esc(p.license)+'</span><span>'+esc(p.status)+'</span></div>'+
