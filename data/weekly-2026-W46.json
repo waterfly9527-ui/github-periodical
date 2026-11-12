@@ -278,8 +278,25 @@
     "2026-W34-extra",
     "2026-W33",
     "2026-W33-extra",
-    "2026-W32",
     "2026-W32-extra"
   ],
-  "exact_repository_overlap": 0
+  "exact_repository_overlap": 0,
+  "historical_repository_count": 72,
+  "deduplication": {
+    "window": "previous published weekly issues with available structured data",
+    "compared_issues": [
+      "2026-W39",
+      "2026-W38",
+      "2026-W36",
+      "2026-W35",
+      "2026-W34",
+      "2026-W34-extra",
+      "2026-W33",
+      "2026-W33-extra",
+      "2026-W32-extra"
+    ],
+    "historical_repository_count": 72,
+    "candidate_repository_count": 8,
+    "exact_repository_overlap": 0
+  }
 }
