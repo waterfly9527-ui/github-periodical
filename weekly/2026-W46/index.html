@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="2026-W46 GitHub 开源周刊：Agent 从软件理解、开发编排、浏览器操作到安全审计的交付闭环。">
+<title>GitHub 开源周刊 2026-W46 · Agent 软件交付闭环</title>
+<style>
+:root{--bg:#f3f5fa;--paper:#fff;--text:#172033;--muted:#667085;--line:#dfe5ee;--brand:#6259e8;--cyan:#0f9b9a;--green:#087a67;--orange:#a95d16;--shadow:0 18px 50px #1e293b12}
+html[data-theme="dark"]{--bg:#0b1119;--paper:#151d29;--text:#f2f5fb;--muted:#a8b2c2;--line:#303a4b;--brand:#a69cff;--cyan:#66d9d3;--green:#69d9bf;--orange:#ffc17a;--shadow:0 22px 60px #0007}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 90% 0,#6259e81a,transparent 27%),radial-gradient(circle at 0 38%,#0f9b9a0d,transparent 24%),var(--bg);color:var(--text);font:15px/1.7 Inter,system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:inherit}button,input,select{font:inherit}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+nav .wrap{min-height:66px;display:flex;align-items:center;gap:12px}nav strong{margin-right:auto}nav a{text-decoration:none;color:var(--muted);padding:7px 9px;border-radius:9px}
+button,input,select{border:1px solid var(--line);background:var(--paper);color:var(--text);border-radius:11px;padding:10px 12px}button{cursor:pointer;font-weight:800}
+.hero{padding:58px 0 25px}.hero-box{position:relative;overflow:hidden;background:#101827;color:#fff;border-radius:32px;padding:48px;box-shadow:var(--shadow)}
+.hero-box:after{content:"";position:absolute;width:470px;height:470px;border:1px solid #a69cff55;border-radius:50%;right:-170px;top:-300px;box-shadow:0 0 0 58px #6259e818,0 0 0 118px #0f9b9a12}
+.kicker{color:#9af2e6;font-weight:900;letter-spacing:.1em;font-size:.82rem}.hero h1{position:relative;z-index:1;font-size:clamp(2.5rem,6.5vw,5.3rem);line-height:1.03;letter-spacing:-.06em;max-width:950px;margin:18px 0}
+.lead{position:relative;z-index:1;color:#c8d2e1;max-width:900px;font-size:1.08rem}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:1}.pill{border:1px solid #ffffff35;border-radius:999px;padding:7px 11px;font-size:.82rem;font-weight:800}
+.spotlight{position:relative;z-index:1;margin-top:20px;border:1px solid #66d9bf66;background:#0f9b9a20;border-radius:16px;padding:15px 17px;color:#e6fffa}.spotlight a{font-weight:900;color:#a4fff0}
+section{padding:25px 0}.section-title{font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.045em;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 17px}
+.callout{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.callout strong{color:var(--brand)}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}.stage{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow)}.stage b{display:block;color:var(--brand);margin-bottom:5px}.stage small{color:var(--muted)}
+.toc{display:flex;gap:8px;flex-wrap:wrap}.toc a{border:1px solid var(--line);background:var(--paper);padding:7px 11px;border-radius:999px;text-decoration:none;font-size:.83rem;font-weight:800}
+.toolbar{position:sticky;top:76px;z-index:30;display:grid;grid-template-columns:1.5fr .9fr .8fr auto;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:12px;box-shadow:var(--shadow);margin:16px 0}
+.result{color:var(--muted);font-size:.9rem;margin:10px 2px 14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:21px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card-top{display:flex;align-items:flex-start;gap:12px;padding:19px 19px 0}.mark{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:linear-gradient(135deg,#6259e8,#0f9b9a);display:grid;place-items:center;color:white;font-size:.9rem;font-weight:950;position:relative;overflow:hidden}.mark img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.card-title{min-width:0;flex:1}.card-title h3{margin:0;font-size:1.24rem;line-height:1.25}.repo{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.layer{font-size:.74rem;font-weight:900;color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--paper));border:1px solid color-mix(in srgb,var(--brand) 20%,var(--line));border-radius:999px;padding:5px 8px;white-space:nowrap}
+.card-body{padding:14px 19px 19px;display:flex;flex-direction:column;flex:1}.desc{color:var(--muted);margin:0 0 12px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}.meta span{font-size:.75rem;border:1px solid var(--line);border-radius:8px;padding:4px 7px;color:var(--muted)}
+.role{border-left:3px solid var(--cyan);padding:8px 11px;background:color-mix(in srgb,var(--cyan) 6%,var(--paper));border-radius:0 10px 10px 0;font-size:.87rem;margin-bottom:8px}
+details{border-top:1px solid var(--line);margin-top:9px;padding-top:9px}summary{cursor:pointer;font-weight:850;font-size:.88rem}details ul{padding-left:19px;color:var(--muted);margin:8px 0}details li{margin:4px 0}.risk{color:var(--orange);font-size:.85rem;margin:8px 0 0}
+.commit{font-size:.8rem;color:var(--muted);margin-top:11px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:14px}.btn{display:inline-flex;align-items:center;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:.82rem;font-weight:850}.btn.primary{background:var(--text);color:var(--bg)}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:17px;background:var(--paper);box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;min-width:880px}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:.76rem;color:var(--muted)}td{font-size:.86rem}
+.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.route{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:17px}.route b{display:block;color:var(--brand);margin-bottom:8px}.stack{font: .82rem/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--cyan);overflow-wrap:anywhere}
+.adoption{counter-reset:step;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.adopt{counter-increment:step;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px}.adopt:before{content:"0" counter(step);display:block;color:var(--brand);font-weight:950;font-size:1.15rem;margin-bottom:7px}
+.risks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.risk-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;color:var(--muted);font-size:.88rem}
+footer{padding:35px 0 58px;color:var(--muted);font-size:.84rem}
+@media(max-width:920px){.pipeline{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.routes{grid-template-columns:1fr 1fr}.adoption{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.hero-box{padding:30px 22px}.toolbar{position:static;grid-template-columns:1fr 1fr}.pipeline,.routes,.adoption,.risks{grid-template-columns:1fr}nav a:nth-of-type(-n+2){display:none}.layer{font-size:.68rem}.card-top{padding:15px 15px 0}.card-body{padding:12px 15px 16px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><strong>GitHub 开源周刊</strong><a href="#pipeline">技术链路</a><a href="#projects">8 个项目</a><a href="#routes">落地路径</a><a href="../../archive/">历史归档</a><a href="https://github.com/waterfly9527-ui/github-periodical" target="_blank" rel="noopener">本站仓库</a><button id="theme" aria-label="切换深浅色">◐</button></div></nav>
+<main>
+<section class="hero"><div class="wrap"><div class="hero-box">
+<div class="kicker">WEEKLY · 2026-W46 · 2026-11-12</div>
+<h1>Agent 正在接管软件交付闭环：从理解系统到验证上线</h1>
+<p class="lead">AI 编程工具的分水岭，正在从“能不能写出代码”转向“能不能理解已有系统、遵循工程流程、操作真实界面，并拿出可复核的交付证据”。本期沿着软件生产链路，拆解 8 个值得放进技术雷达的开源项目。</p>
+<div class="pills"><span class="pill">8 个项目</span><span class="pill">5 个技术环节</span><span class="pill">理解 → 规划 → 构建 → 验收 → 安全</span><span class="pill">MIT / Apache-2.0</span></div>
+<div class="spotlight"><b>本期判断：</b>Agent 的能力边界不再只由模型决定，而由它能否接入可靠的工具、受控的执行环境、真实的测试反馈和独立验证机制共同决定。</div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">先看技术链路</h2><p class="sub">这 8 个仓库不是一套已经集成好的产品，而是软件交付闭环中的不同组件；团队需要按权限和质量要求组合。</p>
+<div class="callout"><strong>趋势判断：</strong>代码生成正在成为中间步骤。真正决定 Agent 是否能进入生产工作流的，是前后两端：前端要有足够的系统上下文，后端要有可复核的测试、安全与发布证据。没有这两端，Agent 只是更快地产生待人工检查的代码。</div>
+<div class="pipeline" id="pipeline">
+<div class="stage"><b>01 · 理解</b><small>REA / Craft Anything：观察已有软件、提取行为与界面线索。</small></div>
+<div class="stage"><b>02 · 规划</b><small>Agent Skills：把需求拆成规格、原子任务和验收条件。</small></div>
+<div class="stage"><b>03 · 执行</b><small>T3 Code：管理本机多个编码 Agent 的会话与入口。</small></div>
+<div class="stage"><b>04 · 构建与操作</b><small>Astryx / agent-browser：约束 UI 组件，并在真实浏览器中验证交互。</small></div>
+<div class="stage"><b>05 · 安全验收</b><small>Cloudflare Audit / Codex Security：形成覆盖记录、漏洞证据与修复复核。</small></div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">快速目录</h2><div class="toc" id="toc"></div></div></section>
+
+<section id="projects"><div class="wrap"><h2 class="section-title">8 个项目拆解</h2><p class="sub">按职责筛选或搜索项目。每张卡片包含项目定位、关键能力、近期提交信号和采用边界。</p>
+<div class="toolbar"><input id="q" type="search" placeholder="搜索项目、能力、语言或场景…"><select id="layer"><option value="">全部技术环节</option></select><select id="sort"><option value="curated">编辑顺序</option><option value="name">按名称</option><option value="layer">按技术环节</option></select><button id="reset">重置</button></div>
+<div class="result" id="result"></div><div class="grid" id="grid"></div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">项目对比矩阵</h2><p class="sub">按输入、输出和主要作用区分，避免把工作流资产、控制台和安全扫描器当成同一种工具。</p>
+<div class="table-wrap"><table><thead><tr><th>项目</th><th>所在环节</th><th>输入 → 输出</th><th>技术 / 许可证</th><th>最适合</th></tr></thead><tbody id="matrix"></tbody></table></div></div></section>
+
+<section id="routes"><div class="wrap"><h2 class="section-title">三条可落地组合路径</h2><p class="sub">按实际任务选组件，不必一次性引入整套工具链。</p>
+<div class="routes">
+<div class="route"><b>遗留系统现代化</b><div class="stack">REA → Agent Skills → T3 Code → agent-browser → Codex Security</div><p>先理解原有行为，再按小任务改造；浏览器验收和安全扫描作为交付门槛。</p></div>
+<div class="route"><b>参考产品快速原型</b><div class="stack">Craft Anything → Astryx → agent-browser</div><p>研究有权使用的参考产品，生成独立实现，用设计系统约束 UI，再验证关键交互。</p></div>
+<div class="route"><b>团队级 Agent 质量门禁</b><div class="stack">Agent Skills → Cloudflare Audit → Codex Security</div><p>统一工程流程，把覆盖账本、结构化漏洞记录和修复验证接入评审流程。</p></div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">推荐采用顺序</h2><div class="adoption">
+<div class="adopt">先用 Agent Skills 固化需求、计划和测试要求，让 Agent 先给出可审查计划。</div>
+<div class="adopt">把本地 Agent 放进独立 worktree 或容器，再接入 T3 Code 控制会话。</div>
+<div class="adopt">用 REA / Craft Anything 获取系统证据；区分观察事实与模型推断。</div>
+<div class="adopt">用 Astryx 约束 UI，用 agent-browser 检查真实页面和交互结果。</div>
+<div class="adopt">最后接入安全审计；漏洞修复、依赖升级和部署保留人工批准点。</div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">采用前必须看清的边界</h2><div class="risks">
+<div class="risk-card">Skill 是指令与脚本，不是安全沙箱。权限隔离要由操作系统、容器、凭证和宿主工具实现。</div>
+<div class="risk-card">浏览器和远程 Agent 控制可能触发真实副作用；使用隔离账号、测试环境和操作确认。</div>
+<div class="risk-card">逆向分析与 clean-room 重建必须基于授权，并检查版权、商标、隐私和服务条款。</div>
+<div class="risk-card">自动安全审计有覆盖盲区和误报；保留源码证据、扫描范围和未验证事项。</div>
+<div class="risk-card">Astryx 处于 Beta，Craft Anything 处于 early alpha；生产采用前先做兼容性和稳定性验证。</div>
+<div class="risk-card">本期项目属于不同层次，不能直接拼成“全自动交付”；每个连接点都需要权限、测试和人工责任人。</div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="section-title">编辑结论</h2><div class="callout">Agent 工程化的下一阶段，不是把所有工具交给一个更大的 Agent，而是把软件开发拆成可观察、可授权、可回滚、可验证的步骤。值得优先投入的不是“全自动按钮”，而是系统上下文、可重复流程、真实验收和安全证据这四类基础设施。</div></div></section>
+</main>
+<footer><div class="wrap">期号：2026-W46 · 快照日期：2026-11-12 · 项目事实来自对应 GitHub 仓库 README、LICENSE、仓库页面与最近提交；趋势判断、采用路径和风险分析属于编辑分析。本期不以 Stars/Forks 排名代替技术判断。<br><a href="../../archive/">返回历史归档</a> · <a href="https://github.com/waterfly9527-ui/github-periodical">GitHub 仓库</a></div></footer>
+
+<script>
+const P=[{"id":"rea","mark":"REA","name":"REA · Reverse Engineer Anything","repo":"morluto/rea","layer":"理解既有软件","language":"TypeScript","license":"MIT","summary":"通过 MCP 把逆向分析工具交给 Agent：检查网站、JavaScript/Electron 应用、.NET 程序集与原生二进制，解释功能如何工作，并尽量给出可追溯的分析证据。","role":"软件理解 / 逆向分析入口","audience":"维护遗留系统、做兼容性分析、研究应用行为或需要从现有产品提炼需求的工程团队。","capabilities":["面向二进制、应用和运行时行为的统一 MCP 工具入口","覆盖 JavaScript/Electron、.NET、网站和原生二进制","可从终端或 Agent 工作流调用，分析时不要求目标项目提供源码"],"output":"带证据的结构分析、行为解释与可供后续实现使用的线索","status":"MIT · MCP 工具链","risk":"仅对有权分析的软件使用；混淆、加密、反调试和平台差异会影响结果。逆向分析结果不是原始设计文档，也不能替代对知识产权与许可边界的判断。","commit":"fix(pe): honor import directory bounds (#10044)","commitUrl":"https://github.com/morluto/rea/commit/047d75a498f18a6608f35ee5e36cf1bf0f81ca97","repoUrl":"https://github.com/morluto/rea"},{"id":"craft-anything","mark":"CA","name":"Craft Anything","repo":"storytold/craft-anything","layer":"理解并重建产品","language":"Rust","license":"MIT OR Apache-2.0","summary":"把网站、桌面应用、手机应用、游戏或文件作为研究对象，调用真实检查工具理解其行为，再让编码 Agent 构建一个新的实现，并对照原始目标检查和迭代。","role":"参考产品研究 → clean-room 重建","audience":"产品原型、兼容性实现、界面复刻研究和跨平台应用开发者。","capabilities":["以实际检查工具研究网站、应用、游戏与文件","让编码 Agent 从分析结果生成独立项目","通过对照检查发现差异，再继续修正"],"output":"新的 Rust 项目及与参考对象的差异检查结果","status":"早期 Alpha · 跨平台","risk":"项目 README 明确标注 early alpha；复杂交互、账号体系和服务端行为未必能被完整重建。clean-room 实现不自动免除版权、商标、数据保护或服务条款责任。","commit":"Add Help > Check for Updates and bump to 0.6.1 (#1706)","commitUrl":"https://github.com/storytold/craft-anything/commit/5b3f1d818f1ec3c0d7a760af1168ad68f7badf08","repoUrl":"https://github.com/storytold/craft-anything"},{"id":"agent-skills","mark":"SK","name":"Agent Skills · Addy Osmani","repo":"addyosmani/agent-skills","layer":"开发流程规范","language":"JavaScript / Markdown","license":"MIT","summary":"把资深工程师的工作方法打包成可复用 Skills：从需求澄清、规格和计划，到增量实现、测试、代码审查、性能审计与发布。","role":"把工程流程变成 Agent 可重复执行的工作规范","audience":"希望多个编码 Agent 遵循同一套工程质量门槛的个人开发者和团队。","capabilities":["9 个生命周期命令，覆盖 spec、plan、build、test、review、ship 等阶段","README 列出 25 个 Skills，可按任务自动触发","通过 skills CLI 安装到多种编码 Agent 环境"],"output":"可安装的工程工作流、检查清单和质量门槛","status":"MIT · 多 Agent 工作流资产","risk":"Skill 是指令与脚本集合，不是沙箱或权限系统；命令是否安全仍取决于 Agent 宿主、工具权限和人工审批。单独安装 Skill 时需留意 README 提到的共享 references 路径限制。","commit":"Merge #736: validate review findings against code and baseline","commitUrl":"https://github.com/addyosmani/agent-skills/commit/301b02b12bff98e4688e6984af6556802322bbde","repoUrl":"https://github.com/addyosmani/agent-skills"},{"id":"t3code","mark":"T3","name":"T3 Code","repo":"pingdotgg/t3code","layer":"Agent 控制台","language":"TypeScript","license":"MIT","summary":"一个 agent harness control surface：在本机运行编码 Agent，通过桌面端、Web 或手机控制 Claude Code、Codex、Cursor、OpenCode 等本地 CLI。","role":"多 Agent 会话控制与远程入口","audience":"同时使用多个编码 Agent、需要从手机观察或接续本机开发任务的开发者。","capabilities":["连接多种本机 Agent CLI，不把模型供应商锁定在单一产品","提供 Web、Electron 桌面和 iOS/Android 控制入口","支持本地服务常驻、机器关联与远程访问配置"],"output":"本地 Agent 会话的统一控制界面","status":"MIT · 快速迭代","risk":"它本身不是模型，也不会替代各 Agent 的账号与订阅。远程控制意味着本机代码和命令执行面被暴露，必须限制可信设备、网络入口和本地权限。","commit":"fix(mobile): the Link a machine sheet scrolls on Android (#34659)","commitUrl":"https://github.com/pingdotgg/t3code/commit/6b1d9d5c30573e16272ff4ee8714ad5eb468fdf9","repoUrl":"https://github.com/pingdotgg/t3code"},{"id":"astryx","mark":"AX","name":"Astryx","repo":"meta/astryx","layer":"前端实现基座","language":"TypeScript","license":"MIT","summary":"Meta 发布的 React 设计系统，基于 React 19+ 与 StyleX，提供 150+ 可访问组件、主题、模板、Storybook 和 CLI，目标是让人和 Agent 使用同一套组件接口。","role":"Agent 生成前端界面的设计系统与组件基座","audience":"React 产品团队、设计系统维护者，以及希望减少 Agent 自创 UI 组件的团队。","capabilities":["150+ 可访问 React 组件和品牌主题能力","CLI、文档和 Storybook 面向人类与编码 Agent 一起设计","组件可组合、可深入定制，避免只能使用封闭的高层封装"],"output":"一致的 React UI 组件、主题和页面模板","status":"Beta · React 19+","risk":"项目仍处 Beta，且要求 React 19 或更高版本；采用前要检查现有设计系统、样式方案和组件可访问性测试是否兼容。","commit":"perf(docsite): serve template preview images through the image optimizer (#11320)","commitUrl":"https://github.com/meta/astryx/commit/d084760dba01c5fbe3c5013a83f42f8b7c9b5f8f","repoUrl":"https://github.com/meta/astryx"},{"id":"agent-browser","mark":"AB","name":"agent-browser","repo":"vercel-labs/agent-browser","layer":"浏览器操作与验证","language":"Rust","license":"Apache-2.0","summary":"面向 AI Agent 的原生 Rust 浏览器自动化 CLI。把页面转成紧凑的可访问性树，为元素分配引用标识，再通过命令行点击、输入、导航并读取结果。","role":"把浏览器变成 Agent 可操作、可检查的工具","audience":"Web 应用验收、端到端测试、自动化表单和需要浏览器证据的 Agent 工作流。","capabilities":["通过 accessibility snapshot 获取页面结构和可交互元素引用","基于 Chrome DevTools Protocol 的常驻后台进程与独立 session","可连接本机 Chrome、iOS Simulator 或受支持的云浏览器"],"output":"可复查的浏览器状态、交互结果和自动化步骤","status":"Apache-2.0 · Rust CLI","risk":"DOM 变化或页面导航后，旧 snapshot 引用会失效，必须重新读取页面；登录态、支付、删除等有副作用的操作应使用隔离测试账号和人工确认。","commit":"Match Modern Web Guidance examples to command output (#2575)","commitUrl":"https://github.com/vercel-labs/agent-browser/commit/51b6f8a40c6f1b330f4f2021b1af154ebc6be464","repoUrl":"https://github.com/vercel-labs/agent-browser"},{"id":"cloudflare-audit","mark":"CF","name":"Cloudflare Security Audit Skill","repo":"cloudflare/security-audit-skill","layer":"安全审计与证据","language":"JavaScript / Markdown","license":"MIT","summary":"把编码 Agent 组织成多阶段安全审计流程：先做架构侦察和覆盖登记，再分工寻找问题、独立验证候选项，最后生成结构化 findings 与报告。","role":"可审计、可追踪的 Agent 安全审计流程","audience":"希望把 Agent 安全审计纳入代码评审、漏洞排查和安全工程流程的团队。","capabilities":["六阶段工作流：侦察、覆盖驱动 hunting、候选验证、结构化输出、独立复核、报告","使用 coverage ledger 与 findings JSON schema 记录覆盖和证据","对 confirmed、needs_validation、rejected 采用不同结论状态"],"output":"带覆盖账本、证据链和状态分类的安全审计报告","status":"MIT · Agent Skill / 脚本","risk":"这是可组合的审计 Skill，不是开箱即用的完整安全平台；扫描深度依赖目标代码、Agent 能力和覆盖质量。它不能证明未发现漏洞，也不能替代人工安全评审。","commit":"Clarify guidance and full audit modes","commitUrl":"https://github.com/cloudflare/security-audit-skill/commit/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8","repoUrl":"https://github.com/cloudflare/security-audit-skill"},{"id":"codex-security","mark":"CS","name":"Codex Security","repo":"openai/codex-security","layer":"漏洞验证与修复","language":"TypeScript","license":"Apache-2.0","summary":"OpenAI 发布的安全 CLI 与 TypeScript SDK，可扫描仓库、选定路径或 Git diff，验证候选漏洞、生成修复补丁并复查已有修复。","role":"从漏洞发现走到补丁和修复验证","audience":"需要在本地、CI 或多仓库项目中持续运行安全检查的工程与 AppSec 团队。","capabilities":["Standard / Deep scan，支持仓库、路径和变更范围扫描","候选 finding 验证、补丁生成、已有修复复核","CLI、TypeScript SDK、GitHub Action；可导出 SARIF、JSON、CSV 并连接 issue tracker"],"output":"安全扫描报告、漏洞证据、修复补丁和复核结果","status":"Apache-2.0 · CLI + SDK","risk":"需要按 README 配置运行环境和认证；扫描结论要结合报告中的范围、排除项和源代码证据复核。自动补丁应先在隔离分支运行测试，不能直接部署。","commit":"feat(scans): resume interrupted Standard scans (#2610)","commitUrl":"https://github.com/openai/codex-security/commit/69038a2f56514f2d4fab43683c97cd313dc5cecb","repoUrl":"https://github.com/openai/codex-security"}];
+const $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]})}
+function makeCard(p){
+ const avatar="https://github.com/"+p.repo.split("/")[0]+".png";
+ return '<article class="card" id="'+esc(p.id)+'">'+
+ '<div class="card-top"><div class="mark"><span>'+esc(p.mark)+'</span><img src="'+avatar+'" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>'+
+ '<div class="card-title"><h3>'+esc(p.name)+'</h3><div class="repo">'+esc(p.repo)+'</div></div><span class="layer">'+esc(p.layer)+'</span></div>'+
+ '<div class="card-body"><p class="desc">'+esc(p.summary)+'</p>'+
+ '<div class="meta"><span>'+esc(p.language)+'</span><span>'+esc(p.license)+'</span><span>'+esc(p.status)+'</span></div>'+
+ '<div class="role"><b>项目定位：</b>'+esc(p.role)+'</div>'+
+ '<details><summary>能力、适用人群与采用提醒</summary><ul>'+p.capabilities.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul><p><b>输出：</b>'+esc(p.output)+'</p><p><b>适用：</b>'+esc(p.audience)+'</p><p class="risk"><b>注意：</b>'+esc(p.risk)+'</p></details>'+
+ '<div class="commit">最近提交：'+esc(p.commit)+' · <a href="'+p.commitUrl+'" target="_blank" rel="noopener">查看提交</a></div>'+
+ '<div class="actions"><a class="btn primary" href="'+p.repoUrl+'" target="_blank" rel="noopener">打开 GitHub ↗</a><a class="btn" href="'+p.repoUrl+'/blob/HEAD/LICENSE" target="_blank" rel="noopener">查看许可证</a></div></div></article>';
+}
+function render(){
+ const q=$("q").value.trim().toLowerCase(), layer=$("layer").value, sort=$("sort").value;
+ let list=P.filter(function(p){const hay=[p.name,p.repo,p.layer,p.language,p.license,p.summary,p.role,p.audience,p.risk].join(" ").toLowerCase();return (!q||hay.includes(q))&&(!layer||p.layer===layer)});
+ if(sort==="name") list.sort(function(a,b){return a.name.localeCompare(b.name)});
+ if(sort==="layer") list.sort(function(a,b){return a.layer.localeCompare(b.layer)||a.name.localeCompare(b.name)});
+ $("grid").innerHTML=list.map(makeCard).join("");
+ $("matrix").innerHTML=list.map(function(p){return '<tr><td><a href="'+p.repoUrl+'" target="_blank" rel="noopener"><b>'+esc(p.name)+'</b></a><br><small>'+esc(p.repo)+'</small></td><td>'+esc(p.layer)+'</td><td>'+esc(p.output)+'</td><td>'+esc(p.language)+'<br>'+esc(p.license)+'</td><td>'+esc(p.audience)+'</td></tr>'}).join("");
+ $("result").textContent="当前显示 "+list.length+" / "+P.length+" 个项目";
+}
+const layers=[...new Set(P.map(function(p){return p.layer}))];
+$("layer").innerHTML='<option value="">全部技术环节</option>'+layers.map(function(x){return '<option value="'+esc(x)+'">'+esc(x)+'</option>'}).join("");
+$("toc").innerHTML=P.map(function(p){return '<a href="#'+esc(p.id)+'">'+esc(p.name)+'</a>'}).join("");
+["q","layer","sort"].forEach(function(id){$(id).addEventListener(id==="q"?"input":"change",render)});
+$("reset").addEventListener("click",function(){$("q").value="";$("layer").value="";$("sort").value="curated";render()});
+$("theme").addEventListener("click",function(){const n=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("weekly-theme",n)}catch(e){}});
+try{document.documentElement.dataset.theme=localStorage.getItem("weekly-theme")||"light"}catch(e){}
+render();
+</script>
+</body></html>
